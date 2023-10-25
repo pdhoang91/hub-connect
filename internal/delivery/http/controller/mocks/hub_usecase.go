@@ -36,10 +36,14 @@ func (_m *HubUseCase) CreateHub(name, location string) (*entities.Hub, error) {
 
 // GetHubByID retrieves hub information by its ID.
 func (hi *HubUseCase) GetHubByID(id int) (*entities.Hub, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }
 
 // SearchHubs searches for hubs based on a keyword.
 func (hi *HubUseCase) SearchHubs(keyword string) ([]*entities.Hub, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }

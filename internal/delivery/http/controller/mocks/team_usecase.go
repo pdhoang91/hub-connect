@@ -36,20 +36,28 @@ func (_m *TeamUseCase) CreateTeam(name, teamType string) (*entities.Team, error)
 
 // UpdateTeam updates a team's associated hub.
 func (_m *TeamUseCase) UpdateTeam(id, hubID int) (*entities.Team, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }
 
 // GetTeamByID retrieves team information by its ID.
 func (_m *TeamUseCase) GetTeamByID(id int) (*entities.Team, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }
 
 // TeamJoinHub associates a team with a hub.
 func (_m *TeamUseCase) TeamJoinHub(teamID, hubID int) error {
+	// Need time to do
+	// ToDo
 	return nil
 }
 
 // SearchTeams searches for teams based on a keyword.
 func (_m *TeamUseCase) SearchTeams(keyword string) ([]*entities.Team, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }

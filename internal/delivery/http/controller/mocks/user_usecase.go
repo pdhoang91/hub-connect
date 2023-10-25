@@ -36,15 +36,21 @@ func (_m *UserUseCase) CreateUser(name string, email string) (*entities.User, er
 
 // UpdateUser updates a user's associated team.
 func (_m *UserUseCase) UpdateUser(id, teamID int) (*entities.User, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }
 
 // GetUserByID retrieves user information by its ID.
 func (_m *UserUseCase) GetUserByID(id int) (*entities.User, error) {
+	// Need time to do
+	// ToDo
 	return nil, nil
 }
 
 // UserJoinTeam associates a user with a team.
 func (_m *UserUseCase) UserJoinTeam(userID, teamID int) error {
+	// Need time to do
+	// ToDo
 	return nil
 }
