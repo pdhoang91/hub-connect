@@ -1,0 +1,311 @@
+---
+schemes:
+- http
+swagger: '2.0'
+info:
+  description: ''
+  title: API Documentations
+  contact: {}
+  version: '1.0'
+host: 127.0.0.1
+basePath: ''
+paths:
+  "/v1/users":
+    post:
+      description: This API allows you to create a new User
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - User API
+      summary: ''
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - description: 'Example: {"name": "User 1", "email": "user1@example.com"}'
+        name: json
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/model.CreateUserRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+  "/v1/teams":
+    post:
+      description: This API allows you to create a new Team
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - Team API
+      summary: ''
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - description: 'Example: {"name": "Team 1", "type": "Type A"}'
+        name: json
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/model.CreateTeamRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+  "/v1/teams/search":
+    post:
+      description: This API allows you to search for Teams by name
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - Team API
+      summary: ''
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - description: 'Example: {"search_name": ""}'
+        name: json
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/model.SearchRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+  "/v1/hubs":
+    post:
+      description: This API allows you to create a new Hub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - Hub API
+      summary: ''
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - description: 'Example: {"name": "Hub 1", "location": "Location 1"}'
+        name: json
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/model.CreateHubRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+  "/v1/hubs/search":
+    post:
+      description: This API allows you to search for Hubs by name
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - Hub API
+      summary: ''
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - description: 'Example: {"search_name": ""}'
+        name: json
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/model.SearchRequest"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+  "/v1/users/{userID}/teams/{teamID}":
+    get:
+      description: This API allows you to assign a User to a Team
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - User API
+      summary: Make sure you have right userID and teamID
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - type: integer
+        description: UserID must is number
+        name: userID
+        in: path
+        required: true
+      - type: integer
+        description: TeamID must is number
+        name: teamID
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+  "/v1/teams/{teamID}/hubs/{hubID}":
+    get:
+      description: This API allows a Team to connect to a Hub
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      tags:
+      - Team API
+      summary: Make sure you have right teamID and hubID
+      parameters:
+      - type: string
+        description: Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==
+        name: Authorization
+        in: header
+        required: true
+      - type: integer
+        description: TeamID must is number
+        name: teamID
+        in: path
+        required: true
+      - type: integer
+        description: HubID must is number
+        name: hubID
+        in: path
+        required: true
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/definitions/model.SuccessResponse"
+        '400':
+          description: Bad Request
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+        '404':
+          description: Not Found
+          schema:
+            "$ref": "#/definitions/model.ErrorResponse"
+definitions:
+  model.SuccessResponse:
+    type: object
+    properties:
+      status:
+        type: string
+      code:
+        type: integer
+      data:
+        type: object
+        properties: {}
+  model.ErrorResponse:
+    type: object
+    properties:
+      status:
+        type: string
+      code:
+        type: integer
+      message:
+        type: string
+  model.CreateUserRequest:
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+  model.CreateTeamRequest:
+    type: object
+    properties:
+      name:
+        type: string
+      type:
+        type: string
+  model.CreateHubRequest:
+    type: object
+    properties:
+      name:
+        type: string
+      location:
+        type: string
+  model.SearchRequest:
+    type: object
+    properties:
+      search_name:
+        type: string

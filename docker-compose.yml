@@ -1,0 +1,37 @@
+# Docker Compose configuration for setting up a PostgreSQL database and a Go application
+version: '3.8'
+services:
+  postgres:
+    container_name: cubicasa-db
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+    ports:
+      - ${DB_PORT}:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "postgres", "-h", "localhost", "-p", "5432"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./migrations/init.sql:/docker-entrypoint-initdb.d/init.sql # Mount the init.sql script
+
+  app:
+    container_name: cubicasa-app
+    image: golang:1.19.3-alpine
+    ports:
+      - "${APP_PORT}:80"
+    volumes:
+      - .:/go/src/cubicasa
+    working_dir: /go/src/cubicasa
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: "go run cmd/main.go"
+    environment:
+      PGURL: "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable" # Use "postgres" as the username
+      MaxOpenConns: 25 # Default value, suitable for Core i7 CPU, 8GB RAM.
+      MaxIdleConns: 20 # Default value, suitable for Core i7 CPU, 8GB RAM.
+      HTTPPort: ":80" # HTTP server port
