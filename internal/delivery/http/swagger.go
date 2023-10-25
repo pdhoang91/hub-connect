@@ -11,10 +11,10 @@ import (
 
 func ConfigureSwagger(cfg *config.Config, r *gin.Engine) {
 	// Configure Swagger documentation
-	docs.SInfo.Title = "API Documentations"
-	docs.SInfo.Version = "1.0"
-	docs.SInfo.Host = cfg.SwaggerDomain
-	docs.SInfo.Schemes = []string{"http"}
+	docs.SwaggerInfo.Title = "API Documentations"
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = cfg.SwaggerDomain
+	docs.SwaggerInfo.Schemes = []string{"http"}
 
 	// Enable Swagger route
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(files.Handler))

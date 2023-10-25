@@ -3,10 +3,10 @@
 package docs
 
 import (
-	"bytes"
-	"encoding/json"
-	"strings"
-	"text/template"
+	// "bytes"
+	// "encoding/json"
+	// "strings"
+	// "text/template"
 
 	"github.com/swaggo/swag"
 )
@@ -479,54 +479,18 @@ var doc = `{
         }
     }
 }`
-
-type swaggerInfo struct {
-	Version     string
-	Host        string
-	BasePath    string
-	Schemes     []string
-	Title       string
-	Description string
-}
-
-var SInfo = swaggerInfo {
-	Version:     "",
-	Host:        "",
-	BasePath:    "",
-	Schemes:     []string{},
-	Title:       "",
-	Description: "",
-}
-
-type swagger struct{}
-
-func (s *swagger) ReadDoc() string {
-	sInfo := SInfo
-	sInfo.Description = strings.Replace(sInfo.Description, "\n", "\\n", -1)
-
-	t, err := template.New("swagger_info").Funcs(template.FuncMap{
-		"marshal": func(v interface{}) string {
-			a, _ := json.Marshal(v)
-			return string(a)
-		},
-		"escape": func(v interface{}) string {
-			str := strings.Replace(v.(string), "\t", "\\t", -1)
-			str = strings.Replace(str, "\"", "\\\"", -1)
-			return strings.Replace(str, "\\\\\"", "\\\\\\\"", -1)
-		},
-	}).Parse(doc)
-	if err != nil {
-		return doc
-	}
-
-	var tpl bytes.Buffer
-	if err := t.Execute(&tpl, sInfo); err != nil {
-		return doc
-	}
-
-	return tpl.String()
+// SwaggerInfo holds exported Swagger Info so clients can modify it
+var SwaggerInfo = &swag.Spec{
+	Version:          "2.0",
+	Host:             "",
+	BasePath:         "",
+	Schemes:          []string{},
+	Title:            "Fiber Swagger Example API",
+	Description:      "This is a sample server.",
+	InfoInstanceName: "swagger",
+	SwaggerTemplate:  doc,
 }
 
 func init() {
-    swag.Register(swag.Name, &swagger{})
+	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
 }
