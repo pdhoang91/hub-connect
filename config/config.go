@@ -11,20 +11,20 @@ import (
 )
 
 var (
-	PGURL         = GetString("PGURL", "host=telecomdb port=5432 user=postgres password=postgres dbname=postgres sslmode=disable")
-	MaxOpenConns  = GetInt("MaxOpenConns", 25)
-	MaxIdleConns  = GetInt("MaxIdleConns", 20)
-	HTTPPort      = GetString("HTTPPort", ":80")
-	SwaggerDomain = GetString("SwaggerDomain", "127.0.0.1")
+// PGURL         = GetString("PGURL", "host=telecomdb port=5432 user=postgres password=postgres dbname=postgres sslmode=disable")
+// MaxOpenConns  = GetInt("MaxOpenConns", 25)
+// MaxIdleConns  = GetInt("MaxIdleConns", 20)
+// HTTPPort      = GetString("HTTPPort", ":80")
+// SwaggerDomain = GetString("SwaggerDomain", "127.0.0.1")
 )
 
 // Config represents the application configuration.
 type Config struct {
-	HTTPPort      string
-	PGURL         string
-	SwaggerDomain string
-	MaxOpenConns  int
-	MaxIdleConns  int
+	APP_PORT       string
+	PGURL          string
+	SWAGGER_DOMAIN string
+	MAX_OPEN_CONNS int
+	MAX_IDLE_CONNS int
 }
 
 // NewConfig returns an initialized Config based on environment variables.
@@ -32,13 +32,12 @@ func NewConfig() *Config {
 
 	// Initialize the Config struct with environment variable values
 	cfg := Config{
-		HTTPPort:      GetString("HTTPPort", ":80"),
-		MaxOpenConns:  GetInt("MaxOpenConns", 25), // Default value, suitable for Core i7 CPU, 8GB RAM.
-		MaxIdleConns:  GetInt("MaxIdleConns", 20), //Default value, suitable for Core i7 CPU, 8GB RAM.
-		PGURL:         GetString("PGURL", "host=telecomdb port=5432 user=postgres password=postgres dbname=postgres sslmode=disable"),
-		SwaggerDomain: GetString("SwaggerDomain", "127.0.0.1"),
+		APP_PORT:       GetString("APP_PORT", "80"),
+		MAX_OPEN_CONNS: GetInt("MAX_OPEN_CONNS", 25), // Default value, suitable for Core i7 CPU, 8GB RAM.
+		MAX_IDLE_CONNS: GetInt("MAX_IDLE_CONNS", 20), //Default value, suitable for Core i7 CPU, 8GB RAM.
+		PGURL:          GetString("PGURL", "host=telecomdb port=5432 user=postgres password=postgres dbname=postgres sslmode=disable"),
+		SWAGGER_DOMAIN: GetString("SWAGGER_DOMAIN", "127.0.0.1"),
 	}
-
 	return &cfg
 }
 
@@ -57,8 +56,8 @@ func InitDBConnection(cfg *Config) (*gorm.DB, error) {
 			}
 
 			// Set maximum idle and in-use connections
-			sqlDB.SetMaxIdleConns(cfg.MaxIdleConns)
-			sqlDB.SetMaxOpenConns(cfg.MaxOpenConns)
+			sqlDB.SetMaxIdleConns(cfg.MAX_IDLE_CONNS)
+			sqlDB.SetMaxOpenConns(cfg.MAX_OPEN_CONNS)
 
 			fmt.Println("Connected to the database!")
 			return db, nil

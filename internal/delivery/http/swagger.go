@@ -13,7 +13,7 @@ func ConfigureSwagger(cfg *config.Config, r *gin.Engine) {
 	// Configure Swagger documentation
 	docs.SwaggerInfo.Title = "API Documentations"
 	docs.SwaggerInfo.Version = "1.0"
-	docs.SwaggerInfo.Host = cfg.SwaggerDomain
+	docs.SwaggerInfo.Host = cfg.SWAGGER_DOMAIN
 	docs.SwaggerInfo.Schemes = []string{"http"}
 
 	// Enable Swagger route

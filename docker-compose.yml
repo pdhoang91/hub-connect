@@ -32,6 +32,6 @@ services:
     command: "go run cmd/main.go"
     environment:
       PGURL: "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable" # Use "postgres" as the username
-      MaxOpenConns: 25 # Default value, suitable for Core i7 CPU, 8GB RAM.
-      MaxIdleConns: 20 # Default value, suitable for Core i7 CPU, 8GB RAM.
-      HTTPPort: ":80" # HTTP server port
+      MAX_OPEN_CONNS: 25 # Default value, suitable for Core i7 CPU, 8GB RAM.
+      MAX_IDLE_CONNS: 20 # Default value, suitable for Core i7 CPU, 8GB RAM.
+      APP_PORT: "80" # HTTP server port

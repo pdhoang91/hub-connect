@@ -18,5 +18,5 @@ func main() {
 	defer config.CloseDBConnection(db)
 
 	app := app.InitializeHTTPServer(cfg, db)
-	app.Run(cfg.HTTPPort)
+	app.Run(":" + cfg.APP_PORT)
 }
