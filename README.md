@@ -28,7 +28,7 @@ DB_PORT = 5432
 SWAGGER_DOMAIN = 127.0.0.1
 ```
 - `PORT` is the port on which the web application will execute
-- `DB_PORT` is the port on which the database application will execute
+- `DB_PORT` is the port on which the database will execute
 - `SWAGGER_DOMAIN` is the swagger domain that will be used for API testing.
 To run the hub-connect, execute the following command:
 ```sh
@@ -39,12 +39,14 @@ git clone https://github.com/pdhoang91/hub-connect.git
 `docker-compose up` or `docker-compose --env-file ./.env up`
 ```
 # Testing API Endpoints with Swagger and Postman
-To increase API security, to access system resources as well as our APIs. You need to add Basic token below to the header:
+To safeguard API security, system resources, and our APIs. The following Basic token must be included in the header:
 `Basic cGRob2FuZzkxQGdtYWlsLmNvbTpjdWJpY2FzYQ==`
 
 ##### Using Swagger
-Follow these steps to test API endpoints using Swagger:
-Swagger documentation may be found at `http://127.0.0.1:{PORT}/swagger/index.html`.
+Follow these steps to test API endpoints using Swagger(It is suitable for testing purposes):
+```shell
+`http://127.0.0.1:80/swagger/index.html`
+```
 
 #####  Using Postman
 To test API endpoints using Postman, follow these steps:
