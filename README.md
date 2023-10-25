@@ -45,7 +45,7 @@ To safeguard API security, system resources, and our APIs. The following Basic t
 ##### Using Swagger
 Follow these steps to test API endpoints using Swagger(It is suitable for testing purposes):
 ```shell
-`http://127.0.0.1:80/swagger/index.html`
+http://127.0.0.1:80/swagger/index.html
 ```
 
 #####  Using Postman
