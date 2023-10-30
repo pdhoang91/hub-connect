@@ -18,8 +18,8 @@ func (tr *TeamRepo) Create(team *entities.Team) error {
 	return tr.DB.Create(team).Error
 }
 
-func (ur *TeamRepo) Update(team *entities.Team) error {
-	return ur.DB.Model(&entities.Team{}).Where("id = ?", team.ID).Updates(team).Error
+func (tr *TeamRepo) Update(team *entities.Team) error {
+	return tr.DB.Model(&entities.Team{}).Where("id = ?", team.ID).Updates(team).Error
 }
 
 func (tr *TeamRepo) FindByID(id int) (*entities.Team, error) {

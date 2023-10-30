@@ -26,9 +26,9 @@ func (hr *HubRepo) FindByID(id int) (*entities.Hub, error) {
 	return &hub, nil
 }
 
-func (tr *HubRepo) SearchHubs(keyword string) ([]*entities.Hub, error) {
+func (hr *HubRepo) SearchHubs(keyword string) ([]*entities.Hub, error) {
 	var hubs []*entities.Hub
-	if err := tr.DB.Where("name LIKE ?", "%"+keyword+"%").
+	if err := hr.DB.Where("name LIKE ?", "%"+keyword+"%").
 		Preload("Teams").
 		Find(&hubs).Error; err != nil {
 		return nil, err

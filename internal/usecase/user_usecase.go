@@ -24,12 +24,12 @@ func NewUserUseCase(userRepo repo.UserRepository, teamRepo repo.TeamRepository) 
 }
 
 // CreateUser handles the creation of a new user.
-func (ui *IUserUseCase) CreateUser(name string, email string) (*entities.User, error) {
+func (iuc *IUserUseCase) CreateUser(name string, email string) (*entities.User, error) {
 	user := &entities.User{
 		Name:  name,
 		Email: email,
 	}
-	if err := ui.UserRepository.Create(user); err != nil {
+	if err := iuc.UserRepository.Create(user); err != nil {
 		return nil, err
 	}
 
@@ -37,12 +37,12 @@ func (ui *IUserUseCase) CreateUser(name string, email string) (*entities.User, e
 }
 
 // UpdateUser updates a user's associated team.
-func (ui *IUserUseCase) UpdateUser(id, teamID int) (*entities.User, error) {
+func (iuc *IUserUseCase) UpdateUser(id, teamID int) (*entities.User, error) {
 	user := &entities.User{
 		ID:     id,
 		TeamID: &teamID,
 	}
-	err := ui.UserRepository.Update(user)
+	err := iuc.UserRepository.Update(user)
 	if err != nil {
 		return nil, err
 	}
@@ -50,8 +50,8 @@ func (ui *IUserUseCase) UpdateUser(id, teamID int) (*entities.User, error) {
 }
 
 // GetUserByID retrieves user information by its ID.
-func (ui *IUserUseCase) GetUserByID(id int) (*entities.User, error) {
-	user, err := ui.UserRepository.FindByID(id)
+func (iuc *IUserUseCase) GetUserByID(id int) (*entities.User, error) {
+	user, err := iuc.UserRepository.FindByID(id)
 	if err != nil {
 		return nil, err
 	}
@@ -59,20 +59,20 @@ func (ui *IUserUseCase) GetUserByID(id int) (*entities.User, error) {
 }
 
 // UserJoinTeam associates a user with a team.
-func (ui *IUserUseCase) UserJoinTeam(userID, teamID int) error {
+func (iuc *IUserUseCase) UserJoinTeam(userID, teamID int) error {
 	var wg sync.WaitGroup
 	var userErr, teamErr error
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		_, userErr = ui.UserRepository.FindByID(userID)
+		_, userErr = iuc.UserRepository.FindByID(userID)
 	}()
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		_, teamErr = ui.TeamRepository.FindByID(teamID)
+		_, teamErr = iuc.TeamRepository.FindByID(teamID)
 	}()
 
 	wg.Wait()
@@ -90,7 +90,7 @@ func (ui *IUserUseCase) UserJoinTeam(userID, teamID int) error {
 		TeamID: &teamID,
 	}
 
-	err := ui.UserRepository.Update(&user)
+	err := iuc.UserRepository.Update(&user)
 	if err != nil {
 		return err
 	}

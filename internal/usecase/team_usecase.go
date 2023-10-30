@@ -24,32 +24,32 @@ func NewTeamUseCase(teamRepo repo.TeamRepository, hubRepo repo.HubRepository) *I
 }
 
 // CreateTeam handles the creation of a new team.
-func (ti *ITeamUseCase) CreateTeam(name, teamType string) (*entities.Team, error) {
+func (itu *ITeamUseCase) CreateTeam(name, teamType string) (*entities.Team, error) {
 	team := &entities.Team{
 		Name: name,
 		Type: teamType,
 	}
-	if err := ti.TeamRepository.Create(team); err != nil {
+	if err := itu.TeamRepository.Create(team); err != nil {
 		return nil, err
 	}
 	return team, nil
 }
 
 // UpdateTeam updates a team's associated hub.
-func (ti *ITeamUseCase) UpdateTeam(id, hubID int) (*entities.Team, error) {
+func (itu *ITeamUseCase) UpdateTeam(id, hubID int) (*entities.Team, error) {
 	team := &entities.Team{
 		ID:    id,
 		HubID: &hubID,
 	}
-	if err := ti.TeamRepository.Update(team); err != nil {
+	if err := itu.TeamRepository.Update(team); err != nil {
 		return nil, err
 	}
 	return team, nil
 }
 
 // GetTeamByID retrieves team information by its ID.
-func (ti *ITeamUseCase) GetTeamByID(id int) (*entities.Team, error) {
-	team, err := ti.TeamRepository.FindByID(id)
+func (itu *ITeamUseCase) GetTeamByID(id int) (*entities.Team, error) {
+	team, err := itu.TeamRepository.FindByID(id)
 	if err != nil {
 		return nil, err
 	}
@@ -57,7 +57,7 @@ func (ti *ITeamUseCase) GetTeamByID(id int) (*entities.Team, error) {
 }
 
 // TeamJoinHub associates a team with a hub.
-func (ti *ITeamUseCase) TeamJoinHub(teamID, hubID int) error {
+func (itu *ITeamUseCase) TeamJoinHub(teamID, hubID int) error {
 
 	var teamErr, hubErr error
 	var wg sync.WaitGroup
@@ -65,13 +65,13 @@ func (ti *ITeamUseCase) TeamJoinHub(teamID, hubID int) error {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		_, teamErr = ti.TeamRepository.FindByID(teamID)
+		_, teamErr = itu.TeamRepository.FindByID(teamID)
 	}()
 
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		_, hubErr = ti.HubRepository.FindByID(hubID)
+		_, hubErr = itu.HubRepository.FindByID(hubID)
 	}()
 
 	wg.Wait()
@@ -89,7 +89,7 @@ func (ti *ITeamUseCase) TeamJoinHub(teamID, hubID int) error {
 		HubID: &hubID,
 	}
 
-	if err := ti.TeamRepository.Update(team); err != nil {
+	if err := itu.TeamRepository.Update(team); err != nil {
 		return err
 	}
 
@@ -97,8 +97,8 @@ func (ti *ITeamUseCase) TeamJoinHub(teamID, hubID int) error {
 }
 
 // SearchTeams searches for teams based on a keyword.
-func (ti *ITeamUseCase) SearchTeams(keyword string) ([]*entities.Team, error) {
-	data, err := ti.TeamRepository.SearchTeams(keyword)
+func (itu *ITeamUseCase) SearchTeams(keyword string) ([]*entities.Team, error) {
+	data, err := itu.TeamRepository.SearchTeams(keyword)
 	if err != nil {
 		return nil, err
 	}
