@@ -59,7 +59,7 @@ func TestHubController_CreateHub(t *testing.T) {
 					)
 				},
 			},
-			expectedResponse: "{\"status\":\"success\",\"code\":200,\"data\":{\"id\":0,\"name\":\"Hub 1\",\"location\":\"Location A\",\"created_at\":null,\"updated_at\":null,\"teams\":null}}",
+			expectedResponse: "{\"status\":\"success\",\"code\":200,\"data\":{\"hub_id\":0,\"name\":\"Hub 1\",\"location\":\"Location A\",\"created_at\":null,\"updated_at\":null,\"teams\":null}}",
 			expectedStatus:   http.StatusOK,
 		},
 	}

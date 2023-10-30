@@ -59,7 +59,7 @@ func TestUserController_CreateUser(t *testing.T) {
 					)
 				},
 			},
-			expectedResponse: "{\"status\":\"success\",\"code\":200,\"data\":{\"id\":0,\"name\":\"User 1\",\"email\":\"email@gmail.com\",\"team_id\":null,\"created_at\":null,\"updated_at\":null}}",
+			expectedResponse: "{\"status\":\"success\",\"code\":200,\"data\":{\"user_id\":0,\"name\":\"User 1\",\"email\":\"email@gmail.com\",\"team_id\":null,\"created_at\":null,\"updated_at\":null}}",
 			expectedStatus:   http.StatusOK,
 		},
 		{

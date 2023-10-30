@@ -59,7 +59,7 @@ func TestTeamController_CreateTeam(t *testing.T) {
 					)
 				},
 			},
-			expectedResponse: "{\"status\":\"success\",\"code\":200,\"data\":{\"id\":0,\"name\":\"Team 1\",\"type\":\"Type A\",\"hub_id\":null,\"created_at\":null,\"updated_at\":null,\"users\":null}}",
+			expectedResponse: "{\"status\":\"success\",\"code\":200,\"data\":{\"team_id\":0,\"name\":\"Team 1\",\"type\":\"Type A\",\"hub_id\":null,\"created_at\":null,\"updated_at\":null,\"users\":null}}",
 			expectedStatus:   http.StatusOK,
 		},
 	}
